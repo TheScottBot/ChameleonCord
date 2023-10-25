@@ -72,10 +72,6 @@ class Example(commands.Cog):
             if not self.__game.players[i].is_chameleon:
                 discord_user = self.bot.get_user(self.__game.players[i].id)
                 await discord_user.send(self.__game.player_deck.grid_formatted(colour))
-                self.test(colour=colour)
-
-        # for i in range(len(self.__game.players)):
-
 
     @commands.command(name="next")
     async def next_round_setup(self, ctx, *args):
@@ -84,17 +80,11 @@ class Example(commands.Cog):
                 await ctx.channel.send(f'{self.__game.players[i].name} was the chameleon')
             self.__game.players[i].is_chameleon = False
 
-    def test(self, colour: str):
-        return self.__game.player_deck.grid_formatted(colour=colour)
-
     def player_in_game(self, player_id: str) -> bool:
         if any(player.id == player_id for player in self.__game.players):
             return True
         return False
 
-
-
-
-
+    
 async def setup(bot):
     await bot.add_cog(Example(bot))
